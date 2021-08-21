@@ -28,8 +28,6 @@ blocks:
       env_vars:
         - name: GO111MODULE
           value: 'on'
-        - name: GOFLAGS
-          value: '-mod=vendor'
       prologue:
         commands:
           - sem-version go 1.16
