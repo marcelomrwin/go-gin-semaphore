@@ -22,3 +22,36 @@ blocks:
           value: 'on'
         - name: GOFLAGS
           value: '-mod=vendor'
+  - name: QA
+    task:
+      env_vars:
+        - name: GO111MODULE
+          value: 'on'
+        - name: GOFLAGS
+          value: '-mod=vendor'
+      prologue:
+        commands:
+          - sem-version go 1.16
+          - checkout
+          - cache restore
+      jobs:
+        - name: Test
+          commands:
+            - go test ./...
+  - name: Build
+    task:
+      env_vars:
+        - name: GO111MODULE
+          value: 'on'
+        - name: GOFLAGS
+          value: '-mod=vendor'
+      prologue:
+        commands:
+          - sem-version go 1.16
+          - checkout
+          - cache restore
+      jobs:
+        - name: Build
+          commands:
+            - go build -v -o go-gin-semaphore
+            - artifact push project --force go-gin-semaphore
