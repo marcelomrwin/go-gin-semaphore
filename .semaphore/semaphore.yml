@@ -32,8 +32,11 @@ blocks:
       prologue:
         commands:
           - sem-version go 1.16
+          - export GOPATH=~/go
+          - 'export PATH=/home/semaphore/go/bin:$PATH'
           - checkout
           - cache restore
+          - go get ./...
       jobs:
         - name: Test
           commands:
