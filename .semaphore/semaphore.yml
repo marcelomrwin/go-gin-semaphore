@@ -16,6 +16,7 @@ blocks:
             - checkout
             - cache restore
             - go mod vendor
+            - go get ./...
             - cache store
       env_vars:
         - name: GO111MODULE
